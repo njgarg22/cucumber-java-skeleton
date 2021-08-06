@@ -6,8 +6,8 @@ import io.cucumber.java.en.When;
 
 public class StepDefinitions {
     @Given("Lucy is located {int} metres from Sean")
-    public void lucy_is_located_metres_from_sean(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
+    public void lucy_is_located_metres_from_sean(Integer distance) {
+        System.out.println(distance);
         throw new io.cucumber.java.PendingException();
     }
     @When("Sean shouts {string}")
