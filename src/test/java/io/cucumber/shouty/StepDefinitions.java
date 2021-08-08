@@ -1,5 +1,6 @@
 package io.cucumber.shouty;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,14 +14,11 @@ public class StepDefinitions {
     private Person sean;
     private Person lucy;
     private String messageFromSean;
-    private Network network = new Network();
+    private Network network;
 
-    @Given("Lucy is located {int} metre(s) from Sean")
-    public void lucy_is_located_metres_from_sean(Integer distance) {
-        Network network = new Network();
-        sean = new Person("sean", network);
-        lucy = new Person("lucy", network);
-        lucy.moveTo(distance);
+    @Before
+    public void createNetwork() {
+        network = new Network();
     }
 
     @Given("a person named Lucy")
