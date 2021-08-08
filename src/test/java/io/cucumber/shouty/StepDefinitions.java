@@ -13,6 +13,7 @@ public class StepDefinitions {
     private Person sean;
     private Person lucy;
     private String messageFromSean;
+    private Network network = new Network();
 
     @Given("Lucy is located {int} metre(s) from Sean")
     public void lucy_is_located_metres_from_sean(Integer distance) {
@@ -24,13 +25,11 @@ public class StepDefinitions {
 
     @Given("a person named Lucy")
     public void a_person_named_lucy() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        lucy = new Person("lucy", network);
     }
     @Given("a person named Sean")
     public void a_person_named_sean() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        sean = new Person("sean", network);
     }
 
     @When("Sean shouts {string}")
