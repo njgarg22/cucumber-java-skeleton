@@ -1,6 +1,7 @@
 package io.cucumber.shouty;
 
 import io.cucumber.java.Before;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -24,6 +25,21 @@ public class StepDefinitions {
     private Network network = new Network(DEFAULT_RANGE);
     private Map<String, Person> people;
 
+    static class Whereabouts {
+        private String name;
+        private Integer location;
+
+        public Whereabouts(String name, int location) {
+            this.name = name;
+            this.location = location;
+        }
+    }
+
+    @DataTableType
+    public Whereabouts defineWhereabouts(Map<String, String> entry) {
+        return new Whereabouts(entry.get("name"), Integer.parseInt(entry.get("location")));
+    }
+
     @Before
     public void createNetwork() {
         people = new HashMap<>();
@@ -39,9 +55,11 @@ public class StepDefinitions {
         people.put(name, new Person(name, 0, network));
     }
 
-    @Given("a person named {word} is located at {int}")
-    public void a_person_named(String name, int location) throws Throwable {
-        people.put(name, new Person(name, location, network));
+    @Given("people are located at")
+    public void people_are_located_at(List<Whereabouts> whereabouts) {
+        for(Whereabouts whereabout: whereabouts) {
+            people.put(whereabout.name, new Person(whereabout.name, whereabout.location, network));
+        }
     }
 
     @When("Sean shouts")
