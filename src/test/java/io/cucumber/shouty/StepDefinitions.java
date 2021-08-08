@@ -21,11 +21,24 @@ public class StepDefinitions {
         lucy = new Person("lucy", network);
         lucy.moveTo(distance);
     }
+
+    @Given("a person named Lucy")
+    public void a_person_named_lucy() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Given("a person named Sean")
+    public void a_person_named_sean() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
     @When("Sean shouts {string}")
     public void sean_shouts(String message) {
         sean.shout(message);
         messageFromSean = message;
     }
+
     @Then("Lucy hears Sean's message")
     public void lucy_hears_sean_s_message() {
         assertEquals(Arrays.asList(messageFromSean), lucy.getMessagesHeard());
