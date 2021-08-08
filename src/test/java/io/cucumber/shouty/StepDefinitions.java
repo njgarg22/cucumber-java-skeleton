@@ -72,6 +72,12 @@ public class StepDefinitions {
         messageFromSean = message;
     }
 
+    @When("Sean shouts the following message")
+    public void sean_shouts_the_following_message(String message) {
+        people.get("Sean").shout(message);
+        messageFromSean = message;
+    }
+
     @Then("Lucy should hear Sean's message")
     public void lucy_hears_sean_s_message() {
         assertEquals(Arrays.asList(messageFromSean), people.get("Lucy").getMessagesHeard());
