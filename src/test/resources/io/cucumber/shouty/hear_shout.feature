@@ -29,6 +29,7 @@ Feature: Hear Shout
 
   Rule: Listener should be able to hear multiple shouts
 
+    @neeraj
     Scenario: Two shouts
       Given a person named Sean
       And a person named Lucy
