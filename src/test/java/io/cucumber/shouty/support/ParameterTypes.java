@@ -5,8 +5,8 @@ import io.cucumber.shouty.Person;
 
 public class ParameterTypes {
 
-    @ParameterType("Lucy|Sean")
+    /*@ParameterType("Lucy|Sean")
     public Person person(String name) {
         return new Person(name);
-    }
+    }*/
 }

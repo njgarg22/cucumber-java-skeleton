@@ -14,10 +14,11 @@ public class StepDefinitions {
     private Person lucy;
     private String messageFromSean;
 
-    @Given("{person} is located {int} metre(s) from Sean")
-    public void lucy_is_located_metres_from_sean(Person person, Integer distance) {
-        sean = new Person("sean");
-        lucy = new Person("lucy");
+    @Given("Lucy is located {int} metre(s) from Sean")
+    public void lucy_is_located_metres_from_sean(Integer distance) {
+        Network network = new Network();
+        sean = new Person("sean", network);
+        lucy = new Person("lucy", network);
         lucy.moveTo(distance);
     }
     @When("Sean shouts {string}")
