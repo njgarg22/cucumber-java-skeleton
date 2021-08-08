@@ -6,38 +6,37 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
 public class StepDefinitions {
 
     private Person sean;
-    private Person lucy;
     private String messageFromSean;
     private Network network;
+    private Map<String, Person> people;
 
     @Before
     public void createNetwork() {
         network = new Network();
+        people = new HashMap<>();
     }
 
-    @Given("a person named Lucy")
-    public void a_person_named_lucy() {
-        lucy = new Person("lucy", network);
-    }
-    @Given("a person named Sean")
-    public void a_person_named_sean() {
-        sean = new Person("sean", network);
+    @Given("a person named {word}")
+    public void a_person_named(String name) {
+        people.put(name, new Person(name, network));
     }
 
     @When("Sean shouts {string}")
     public void sean_shouts(String message) {
-        sean.shout(message);
+        people.get("Sean").shout(message);
         messageFromSean = message;
     }
 
     @Then("Lucy hears Sean's message")
     public void lucy_hears_sean_s_message() {
-        assertEquals(Arrays.asList(messageFromSean), lucy.getMessagesHeard());
+        assertEquals(Arrays.asList(messageFromSean), people.get("Lucy").getMessagesHeard());
     }
 }
