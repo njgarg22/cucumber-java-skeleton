@@ -1,5 +1,6 @@
 package io.cucumber.shouty;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.Transpose;
@@ -7,10 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -93,5 +91,15 @@ public class StepDefinitions {
     @Then("Larry should not hear a shout")
     public void larry_should_not_hear_a_shout() throws Throwable {
         assertEquals(0, people.get("Larry").getMessagesHeard().size());
+    }
+
+    @Then("Lucy hears the following messages:")
+    public void lucy_hears_the_following_messages(io.cucumber.datatable.DataTable expectedMessages) {
+        List<List<String>> actualMessages = new ArrayList<>();
+        List<String> heard = people.get("Lucy").getMessagesHeard();
+        for(String msg: heard) {
+            actualMessages.add(Collections.singletonList(msg));
+        }
+        expectedMessages.diff(DataTable.create(actualMessages));
     }
 }
