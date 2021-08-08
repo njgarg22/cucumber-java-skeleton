@@ -14,9 +14,6 @@ public class Person {
         network.subscribe(this);
     }
 
-    public void moveTo(Integer distance) {
-    }
-
     public void shout(String message) {
         network.broadcast(message);
     }
